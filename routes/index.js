@@ -61,7 +61,7 @@ const getAOneProduct = (req, res) => {
     });
 }
 
-const CreateOneBono = (req, res) => {
+const createBono = (req, res) => {
     // console.log(coupon.length + 1);
     coupon.push({
         id: coupon.length + 1,
@@ -81,7 +81,7 @@ const CreateOneBono = (req, res) => {
 
 router.get('/product/:id', [auth, getAOneProduct]); 
 router.get('/product', [auth, getAllProducts]); 
-router.post('/bono/create', [auth, CreateOneBono]); 
+router.post('/bono/create', [auth, createBono]); 
 
 
 
