@@ -53,9 +53,18 @@ const getAllProducts = (req, res) => {
         data : product
     });
 }
+const getAOneProduct = (req, res) => {
+
+    res.status(200).json({
+        ok:true,
+        data : product.find(data => data.id === +req.params.id)
+    });
+}
 
 
-router.get('/products', [auth, getAllProducts]); 
+
+router.get('/product/:id', [auth, getAOneProduct]); 
+router.get('/product', [auth, getAllProducts]); 
 
 
 
