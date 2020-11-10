@@ -1,2 +1,3 @@
 # WebServer3PIMEDIOS
-# npm i
+# npm i express
+# npm run dev
