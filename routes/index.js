@@ -13,11 +13,11 @@ var product = [
     },
 ]
 
-var coupon = [
+var coupons = [
     {   id:1, 
         name:'producto 3', 
         description: 'coupon de producto', 
-        product_id:3 , 
+        product_id:3, 
         valid_since: '2020-02-25T00:00:00.000', 
         valid_until: '2020-02-25T23:59:00.999'
     },
@@ -62,7 +62,6 @@ const getAOneProduct = (req, res) => {
 }
 
 const createCoupon = (req, res) => {
-    // console.log(coupon.length + 1);
     coupon.push({
         id: coupon.length + 1,
         name: req.body.name,
@@ -78,23 +77,18 @@ const createCoupon = (req, res) => {
     });
 }
 const getAllcoupon = (req, res) => {
-    // console.log(coupon.length + 1);
-    
     res.status(200).json({
         ok:true,
         data : coupon
     });
 }
 const getOnecoupon = (req, res) => {
-    // console.log(coupons.length + 1);
-    
     res.status(200).json({
         ok:true,
         data : coupons.find(data => data.id === +req.params.id)
     });
 }
 const validateCoupon = (req, res) => {
-    // console.log(coupons.length + 1);
     const couponfound = coupons.find(data => data.id === +req.params.id)
 
     couponfound.valid_since = req.body.valid_since,
