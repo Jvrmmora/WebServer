@@ -16,7 +16,7 @@ var product = [
 var coupon = [
     {   id:1, 
         name:'producto 3', 
-        description: 'Bono de producto', 
+        description: 'coupon de producto', 
         product_id:3 , 
         valid_since: '2020-02-25T00:00:00.000', 
         valid_until: '2020-02-25T23:59:00.999'
@@ -61,7 +61,7 @@ const getAOneProduct = (req, res) => {
     });
 }
 
-const createBono = (req, res) => {
+const createCoupon = (req, res) => {
     // console.log(coupon.length + 1);
     coupon.push({
         id: coupon.length + 1,
@@ -77,12 +77,40 @@ const createBono = (req, res) => {
         data : coupon.find(data => data.id === parseInt(coupon.length))
     });
 }
+const getAllcoupon = (req, res) => {
+    // console.log(coupon.length + 1);
+    
+    res.status(200).json({
+        ok:true,
+        data : coupon
+    });
+}
+const getOnecoupon = (req, res) => {
+    // console.log(coupons.length + 1);
+    
+    res.status(200).json({
+        ok:true,
+        data : coupons.find(data => data.id === +req.params.id)
+    });
+}
+const validateCoupon = (req, res) => {
+    // console.log(coupons.length + 1);
+    const couponfound = coupons.find(data => data.id === +req.params.id)
 
+    couponfound.valid_since = req.body.valid_since,
+    couponfound.valid_until= req.body.valid_until,
+    res.status(200).json({
+        ok:true,
+        data : coupons.find(data => data.id === +req.params.id)
+    });
+}
 
 router.get('/product/:id', [auth, getAOneProduct]); 
-router.get('/product', [auth, getAllProducts]); 
-router.post('/bono/create', [auth, createBono]); 
-
+router.get('/products', [auth, getAllProducts]); 
+router.post('/coupon/create', [auth, createCoupon]); 
+router.get('/coupons', [auth, getAllcoupon]); 
+router.get('/coupon/:id', [auth, getOnecoupon]); 
+router.post('/validateCoupon/:id', [authCustomer, validateCoupon]); 
 
 
 
