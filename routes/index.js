@@ -61,10 +61,28 @@ const getAOneProduct = (req, res) => {
     });
 }
 
+const CreateOneBono = (req, res) => {
+    // console.log(coupon.length + 1);
+    coupon.push({
+        id: coupon.length + 1,
+        name: req.body.name,
+        description: req.body.description,
+        product_id: parseInt(req.body.product_id),
+        valid_since: req.body.valid_since,
+        valid_until: req.body.valid_until,
+
+    })
+    res.status(200).json({
+        ok:true,
+        data : coupon.find(data => data.id === parseInt(coupon.length))
+    });
+}
 
 
 router.get('/product/:id', [auth, getAOneProduct]); 
 router.get('/product', [auth, getAllProducts]); 
+router.post('/bono/create', [auth, CreateOneBono]); 
+
 
 
 
